@@ -1,16 +1,16 @@
 (function () {
     // ── Constants ──
-    const GRAVITY = 0.35;
+    const GRAVITY = 0.18;
     const FLAP_FORCE = -6.5;
     const FLAP_FORWARD = 0.3;
-    const MAX_VY = 10;
-    const BASE_SPEED = 3;
-    const MAX_SPEED = 7;
-    const BIRD_RADIUS = 16;
+    const MAX_VY = 7;
+    const BASE_SPEED = 1.8;
+    const MAX_SPEED = 3.5;
+    const BIRD_RADIUS = 12;
     const OBS_WIDTH = 60;
-    const GAP_HEIGHT = 160;
-    const OBS_INTERVAL_MIN = 220;
-    const OBS_INTERVAL_MAX = 320;
+    const GAP_HEIGHT = 250;
+    const OBS_INTERVAL_MIN = 400;
+    const OBS_INTERVAL_MAX = 600;
     const OBSTACLE_TYPES = ['stone', 'ice', 'tree', 'fire', 'metal'];
 
     // ── DOM refs ──
@@ -108,8 +108,8 @@
             scored: false
         });
 
-        const speedFactor = Math.min(score / 30, 1);
-        nextObsDistance = OBS_INTERVAL_MIN + (OBS_INTERVAL_MAX - OBS_INTERVAL_MIN) * (1 - speedFactor * 0.5)
+        const speedFactor = Math.min(score / 50, 1);
+        nextObsDistance = OBS_INTERVAL_MIN + (OBS_INTERVAL_MAX - OBS_INTERVAL_MIN) * (1 - speedFactor * 0.4)
             * (0.8 + Math.random() * 0.4);
     }
 
@@ -126,7 +126,7 @@
         if (handState.isFlapping && state === 'PLAYING') {
             const intensity = handState.normalizedIntensity;
             const flapForce = FLAP_FORCE * intensity;
-            bird.vy += flapForce * 0.45;
+            bird.vy += flapForce * 0.7;
             bird.vy = Math.max(bird.vy, -MAX_VY);
 
             // Forward boost
@@ -179,7 +179,7 @@
         }
 
         // Update game speed based on score and speed multiplier
-        gameSpeed = (BASE_SPEED + Math.min(score * 0.08, MAX_SPEED - BASE_SPEED)) * speedMultiplier;
+        gameSpeed = (BASE_SPEED + Math.min(score * 0.03, MAX_SPEED - BASE_SPEED)) * speedMultiplier;
     }
 
     function updateObstacles() {
