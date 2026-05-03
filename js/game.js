@@ -26,6 +26,8 @@
     const handStatusEl = document.getElementById('hand-status');
     const flapBarEl = document.getElementById('flap-bar');
     const scoreDisplayEl = document.getElementById('score-display');
+    const speedSlider = document.getElementById('speedSlider');
+    const speedValueEl = document.getElementById('speedValue');
 
     // ── Modules ──
     const audio = new AudioManager();
@@ -38,6 +40,7 @@
     let bestScore = parseInt(localStorage.getItem('flapbird_best') || '0');
     let gameSpeed = BASE_SPEED;
     let lastFlapSoundTime = 0;
+    let speedMultiplier = parseFloat(speedSlider.value);
 
     bestScoreEl.textContent = bestScore;
 
@@ -175,8 +178,8 @@
             bird.vy = Math.max(0, bird.vy);
         }
 
-        // Update game speed based on score
-        gameSpeed = BASE_SPEED + Math.min(score * 0.08, MAX_SPEED - BASE_SPEED);
+        // Update game speed based on score and speed multiplier
+        gameSpeed = (BASE_SPEED + Math.min(score * 0.08, MAX_SPEED - BASE_SPEED)) * speedMultiplier;
     }
 
     function updateObstacles() {
@@ -373,6 +376,12 @@
 
     window.addEventListener('resize', () => {
         renderer.resize(window.innerWidth, window.innerHeight);
+    });
+
+    // Speed slider
+    speedSlider.addEventListener('input', () => {
+        speedMultiplier = parseFloat(speedSlider.value);
+        speedValueEl.textContent = speedMultiplier.toFixed(1) + 'x';
     });
 
     // ── Bootstrap ──
