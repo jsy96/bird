@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手势飞鸟 - FlapBird</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/hands.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.3.1675466862/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.3.1675466124/drawing_utils.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="score-display">
+            <span id="score">0</span>
+        </div>
+
+        <div id="best-score-display">
+            BEST: <span id="best-score">0</span>
+        </div>
+
+        <div id="hand-indicator">
+            <div id="hand-status">等待手部检测...</div>
+            <div id="flap-bar-container">
+                <div id="flap-bar"></div>
+            </div>
+        </div>
+
+        <div id="camera-container">
+            <video id="webcam" autoplay playsinline></video>
+            <canvas id="cameraCanvas"></canvas>
+        </div>
+
+        <div id="start-screen">
+            <h1>手势飞鸟</h1>
+            <p>用大拇指和食指的张合控制小鸟飞行</p>
+            <p class="hint">快速张合手指 = 扇动翅膀</p>
+            <button id="startBtn">开始游戏</button>
+        </div>
+
+        <div id="game-over-screen" class="hidden">
+            <h2>游戏结束</h2>
+            <p>得分: <span id="final-score">0</span></p>
+            <p>最高分: <span id="final-best-score">0</span></p>
+            <button id="restartBtn">再来一次</button>
+        </div>
+    </div>
+
+    <script src="js/audio.js"></script>
+    <script src="js/hand.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
