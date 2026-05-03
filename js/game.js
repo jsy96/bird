@@ -8,9 +8,9 @@
     const MAX_SPEED = 3.5;
     const BIRD_RADIUS = 12;
     const OBS_WIDTH = 60;
-    const GAP_HEIGHT = 250;
-    const OBS_INTERVAL_MIN = 400;
-    const OBS_INTERVAL_MAX = 600;
+    const GAP_HEIGHT = 320;
+    const OBS_INTERVAL_MIN = 500;
+    const OBS_INTERVAL_MAX = 700;
     const OBSTACLE_TYPES = ['stone', 'ice', 'tree', 'fire', 'metal'];
 
     // ── DOM refs ──
@@ -60,7 +60,7 @@
         const H = window.innerHeight;
         renderer.resize(W, H);
 
-        bird.x = W * 0.25;
+        bird.x = W * 0.4;
         bird.y = H * 0.4;
         bird.vy = 0;
         bird.vx = 0;
@@ -157,8 +157,8 @@
         bird.x += bird.vx;
 
         // Keep bird in horizontal range
-        const minX = window.innerWidth * 0.15;
-        const maxX = window.innerWidth * 0.4;
+        const minX = window.innerWidth * 0.25;
+        const maxX = window.innerWidth * 0.55;
         bird.x = Math.max(minX, Math.min(maxX, bird.x));
 
         // Rotation based on vy
